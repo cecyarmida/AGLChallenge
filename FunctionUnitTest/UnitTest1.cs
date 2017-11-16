@@ -1,16 +1,18 @@
+﻿using FluentAssertions;
 using Functions;
+using Microsoft.Azure.WebJobs.Extensions;
 using System;
 using System.Net.Http;
 using Xunit;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace XUnitTestProject
+namespace FunctionUnitTest
 {
-    public class UnitTest
+   // [TestClass]
+    public class UnitTest1
     {
-        [Theory]
-        [InlineData("Azure")]
-        [InlineData("Dependency")]
-        public async void Given_Dependency_HttpTrigger_ShouldReturn_Result()
+        [Fact]
+        public async void ValidateContent_Test()
         {
             // Arrange
             var req = new HttpRequestMessage()
@@ -25,7 +27,8 @@ namespace XUnitTestProject
 
             // Assert
             var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-            Assert.DoesNotContain("Dog,", content);
+            content.Should().ContainEquivalentOf("Cat");
+
         }
     }
 }

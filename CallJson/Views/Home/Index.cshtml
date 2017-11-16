@@ -1,0 +1,34 @@
+﻿@model IEnumerable<CallJson.Models.PersonPet>
+
+@{
+    ViewData["Title"] = "AGL Challenge";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <thead>
+        
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+  
+<tr>
+    <td>
+        <h4>@Html.DisplayFor(modelItem => item.Gender)</h4>
+    </td>
+</tr>
+   @foreach (var cat in item.Cats){
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => cat.Name)
+
+        </td>
+    </tr>
+    }
+        <tr><td><p></p></td></tr>
+
+}
+    </tbody>
+</table>

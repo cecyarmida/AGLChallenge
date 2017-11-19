@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace FunctionUnitTest
 {
     [TestClass]
-    public class UnitTest1
+    public class UnitTest
     {
         [TestMethod]
         public async Task ValidateContent_Test()
@@ -29,8 +29,9 @@ namespace FunctionUnitTest
 
             // Assert
             var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-            content.Should().ContainEquivalentOf("Cat");
+            content.Should().NotContainEquivalentOf("Cat");
 
         }
+        
     }
 }

@@ -3,22 +3,24 @@ using Functions;
 using Microsoft.Azure.WebJobs.Extensions;
 using System;
 using System.Net.Http;
-using Xunit;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Threading.Tasks;
 
 namespace FunctionUnitTest
 {
-   // [TestClass]
+    [TestClass]
     public class UnitTest1
     {
-        [Fact]
-        public async void ValidateContent_Test()
+        [TestMethod]
+        public async Task ValidateContent_Test()
         {
+            Environment.SetEnvironmentVariable("JsonURL", "https://aglmapjason.azurewebsites.net/mock/agl-json");
             // Arrange
             var req = new HttpRequestMessage()
             {
                 Content = new StringContent(string.Empty),
-                RequestUri = new Uri($"http://localhost")
+                RequestUri = new Uri($"https://aglmapjason.azurewebsites.net/mock/agl-json")
             };
             var log = new TraceMonitor();
 

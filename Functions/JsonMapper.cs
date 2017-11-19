@@ -47,9 +47,10 @@ namespace Functions
                 error = ex.Message.ToString();
             }
 
-            return personCats == null
-                ? req.CreateResponse(HttpStatusCode.BadRequest, error)
-                : req.CreateResponse(HttpStatusCode.OK, JsonConvert.SerializeObject(personCats));
+            var content = personCats == null ? new StringContent(JsonConvert.SerializeObject(error)) : new StringContent(JsonConvert.SerializeObject(personCats));
+            var res = new HttpResponseMessage(personCats == null ? HttpStatusCode.BadRequest : HttpStatusCode.OK);
+            res.Content = content;
+            return res;
         }
         public class Person
         {

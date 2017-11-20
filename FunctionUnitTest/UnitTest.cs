@@ -29,9 +29,29 @@ namespace FunctionUnitTest
 
             // Assert
             var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-            content.Should().NotContainEquivalentOf("Cat");
+            content.Should().NotContainEquivalentOf("Dog");
 
         }
-        
+
+        [TestMethod]
+        public async Task ValidateError_Test()
+        {
+            Environment.SetEnvironmentVariable("JsonURL", "https://aglmapjason.azurewebsites.net/mock/agl-json-error");
+            // Arrange
+            var req = new HttpRequestMessage()
+            {
+                Content = new StringContent(string.Empty),
+                RequestUri = new Uri($"https://aglmapjason.azurewebsites.net/mock/agl-json-error")
+            };
+            var log = new TraceMonitor();
+
+            // Act
+            var result = await JsonMapper.Run(req, log).ConfigureAwait(false);
+
+            // Assert
+            var content = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            content.Should().ContainEquivalentOf("Error");
+
+        }
     }
 }

@@ -44,7 +44,9 @@ namespace Functions
             }
             catch (Exception ex)
             {
-                error = ex.Message.ToString();
+                var errorRes = new HttpResponseMessage(HttpStatusCode.BadRequest);
+                errorRes.Content = new StringContent(ex.Message.ToString());
+                return errorRes;
             }
 
             var content = personCats == null ? new StringContent(JsonConvert.SerializeObject(error)) : new StringContent(JsonConvert.SerializeObject(personCats));

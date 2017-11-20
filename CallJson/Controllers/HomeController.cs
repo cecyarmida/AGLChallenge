@@ -7,17 +7,27 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 using CallJson.Models;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace CallJson.Controllers
 {
     public class HomeController : Controller
     {
+        public static IConfigurationRoot Configuration { get; set; }
         public async Task<IActionResult> Index()
         {
             List<PersonPet> personPets = null;
+            var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json");
+
+            Configuration = builder.Build();
+            var apiUrl = Configuration["FunctionURL"].ToString();
+
             try
             {
-                string json = await GetJson();
+                string json = await GetJson(apiUrl);
                 JArray array = JArray.Parse(json);
                 personPets = array.ToObject<List<PersonPet>>();
             }
@@ -28,9 +38,9 @@ namespace CallJson.Controllers
             return View(personPets);
         }
 
-        private async Task<string> GetJson()
+        private async Task<string> GetJson(string apiURL)
         {
-            var apiURL = "https://aglmapjason.azurewebsites.net/api/JsonMapper?code=e6ImfcGcYzhoxBAvjrMyGiLlPaOwDN7YIVRKe128Av0PAh2PQuGRaQ==";
+            
             HttpClient client = new HttpClient();
             HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, new Uri(apiURL));
            

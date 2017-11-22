@@ -7,7 +7,7 @@ using System.Net.Http;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
 
-namespace FunctionUnitTest
+namespace FunctionTest
 {
     [TestClass]
     public class FunctionValidation

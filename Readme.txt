@@ -11,13 +11,13 @@ The solution comprises three projects:
 It is published on Azure on the following link: 
 https://aglmapjason.azurewebsites.net/api/JsonMapper?code=e6ImfcGcYzhoxBAvjrMyGiLlPaOwDN7YIVRKe128Av0PAh2PQuGRaQ==
 
-2. Call Json is an MVC project that:
+2. CallJson is an MVC project that:
   + Gets Json from the Azure Function 
   + Displays the results formatted on a web browser
 
 NOTE: Run this project to see the Cat's names grouped by gender
 
-3. Unit Test for Function App that includes:
+3. FunctionTest for Function App that includes:
   + Happy path test 
   + Error test
 

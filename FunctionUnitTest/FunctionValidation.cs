@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace FunctionUnitTest
 {
     [TestClass]
-    public class UnitTest
+    public class FunctionValidation
     {
         [TestMethod]
         public async Task ValidateContent_Test()
